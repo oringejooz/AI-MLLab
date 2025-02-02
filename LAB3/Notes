@@ -1,0 +1,116 @@
+1. Understanding the Imports
+These are Python libraries that help us with data handling, visualization, and machine learning:
+
+pandas → Handles data in tables (like Excel).
+numpy → Works with numbers, arrays, and calculations.
+matplotlib.pyplot → Draws graphs and charts.
+seaborn → Makes graphs look better and provides advanced visualization.
+sklearn.model_selection.train_test_split → Splits data into training and testing sets.
+sklearn.linear_model.LinearRegression → A machine learning model for predicting numbers (house prices).
+sklearn.metrics.mean_absolute_error, mean_squared_error → Used to check how good our model is.
+sklearn.datasets.fetch_california_housing → A dataset of house prices in California
+
+------------------------------------------------------------------------------------------------------------
+Loading the dataset
+
+data = fetch_california_housing()
+df = pd.DataFrame(data.data, columns=data.feature_names)
+df['Price'] = data.target  # Add target variable
+
+We load the California housing dataset.
+Convert it into a DataFrame (a table).
+Add a new column Price which we want to predict.
+🔹Result: A table with house details like MedInc (Median Income), HouseAge, AveRooms, etc.
+------------------------------------------------------------------------------------------------------------
+3. Checking the Data
+
+print(df.head())  # Shows the first 5 rows
+print(df.isnull().sum())  # Checks if there are any missing values
+print(df.describe())  # Shows statistical summary
+
+df.head() → Displays the first 5 rows.
+df.isnull().sum() → Checks for missing values (important for cleaning).
+df.describe() → Gives a summary (min, max, average, etc.)
+
+ Data Cleaning
+
+df = df.dropna() #Drops missing values if any - Removes any rows with missing values
+-------------------------------------------------------------------------------------------------------------
+
+Data Visualization
+
+Pair Plot
+
+sns.pairplot(df)
+plt.show()
+
+This draws scatter plots for every feature against each other.
+Helps us see relationships between variables (e.g., does more rooms mean higher price?)
+
+-------------------------------------------------------------------------------------------------------------
+
+Correlation Heatmap
+
+plt.figure(figsize=(10,6))
+sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+plt.show()
+Checks how features are related
+Dark red/blue means strong correlation (e.g., if income is high, prices might be high)
+
+------------------------------------------------------------------------------------------------------------
+Splitting Data for Training & Testing
+
+X = df.drop(columns=['Price'])  # Features (input)
+y = df['Price']  # Target variable (output)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+X → Inputs (House features).
+y → Output (Price).
+Splits data into training (80%) & testing (20%).
+
+------------------------------------------------------------------------------------------------------------
+
+Training a Machine Learning Model
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+Creates a Linear Regression Model (a simple machine learning model).
+Fits (learns) from training data.
+
+(Ordinary Least Squares y = w1x1 + w2x2 + w3x3 + ....)
+
+
+------------------------------------------------------------------------------------------------------------
+Making Predictions & Evaluating the Model
+
+y_pred = model.predict(X_test)
+
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+rmse = np.sqrt(mse)
+
+print(f"Mean Absolute Error (MAE): {mae}")
+print(f"Mean Squared Error (MSE): {mse}")
+print(f"Root Mean Squared Error (RMSE): {rmse}")
+
+Predicts house prices using X_test.
+Checks model accuracy:
+MAE → Average absolute error.
+MSE → Average squared error.
+RMSE → Square root of MSE (closer to 0 = better).
+
+-------------------------------------------------------------------------------------------------------------
+Predicting a New House Price
+
+sample_house = X_test.iloc[0:1]  # Select a sample house
+predicted_price = model.predict(sample_house)
+print(f"Predicted House Price: {predicted_price[0]}")
+
+Picks one house from test data.
+Predicts its price using the trained Model
+
+
+Steps :
+Load & clean data ----> Visualize relationships ---->Split data into training & testing sets ----> Train a Linear Regression model ---->Evaluate performance using error metrics---->Predict new house prices
