@@ -79,7 +79,23 @@ model.fit(X_train, y_train)
 Creates a Linear Regression Model (a simple machine learning model).
 Fits (learns) from training data.
 
-(Ordinary Least Squares y = w1x1 + w2x2 + w3x3 + ....)
+(Ordinary Least Squares y = w1x1 + w2x2 + w3x3 + .... + b)
+This equation represents a Linear Regression Model, where we predict y (the target variable) using a linear combination of input features
+(x1,x2,x3,...xN) and their corresponding weights (w1,w2,w3....wN)
+
+INPUT FEATURES :Input features are the independent variables (or predictors) used to make a prediction.
+Example in House Price Prediction
+Size of house (x1), Number of bedrooms(x2),Age of the house(x3)
+Location rating(x4)
+
+WEIGHTS :Weights (also called coefficients) are numbers assigned to each feature to indicate how important that feature is in predicting the target variable.
+They represent how much each feature contributes to the final prediction.
+The model automatically learns these weights during training
+
+y -> The predicted value (e.g., House Price)
+x1,x2...xN -> Feature variables (e.g., house size, number of bedrooms, etc.)
+w1,w2...wN -> Weights (also called coefficients or slopes), which determine how much each feature contributes to the prediction
+b -> b → Bias term (also called the intercept), which adjusts the overall prediction
 
 
 ------------------------------------------------------------------------------------------------------------
