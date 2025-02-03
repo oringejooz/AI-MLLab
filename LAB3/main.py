@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 from sklearn.datasets import fetch_california_housing
+from sklearn.metrics import r2_score
 
 # Load dataset
 data = fetch_california_housing()
@@ -47,10 +48,12 @@ y_pred = model.predict(X_test)
 mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 rmse = np.sqrt(mse)
+r2 = r2_score(y_test, y_pred)
 
 print(f"Mean Absolute Error (MAE): {mae}")
 print(f"Mean Squared Error (MSE): {mse}")
 print(f"Root Mean Squared Error (RMSE): {rmse}")
+print(f"R² Score: {r2:.4f}")
 
 # Make Predictions
 sample_house = X_test.iloc[0:1]  # Select a sample house
