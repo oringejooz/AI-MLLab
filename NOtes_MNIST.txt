@@ -1,0 +1,14 @@
+keras mnist
+from keras.datasets import mnist
+
+
+one_hot encoding -> Categorical encoding categorical_crossentropy
+
+MNIST DIgit recognizer
+Convolutional Neural Network(CNN)
+relu - We do not want to predict values of negative integers(like -5) so we convert it to either '0' or '+5' 
+SoftMax
+
+epochs : 
+
+Exp 4&5
